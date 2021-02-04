@@ -1,0 +1,99 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout For Foundation </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link rel="stylesheet" href="~/CSS/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Start Top Bar -->
+    <div class="top-bar" id="example-menu">
+        <div class="top-bar-left">
+            <ul class="menu">
+                <li class="menu-text">Books Online</li>
+                <li>@Html.ActionLink("Home", "Home", "Home")</li>
+                <li>@Html.ActionLink("Books", "Index", "Books")</li>
+                <li>@Html.ActionLink("Recommendations", "Index", "Recommendations")</li>
+                @*<li>@Html.ActionLink("Statistics", "Statistics", "Books")</li>*@
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+                <li>@Html.ActionLink("Sign up", "Register", "Home")</li>
+                <li>@Html.ActionLink("Sign in", "Login", "Home")</li>
+                <li>@Html.ActionLink("Log Out", "Logout", "Home")</li>
+
+                @{
+                    if (Session["FullName"] != null)
+                    {
+                        if (Session["Role"].ToString() == "Admin")
+                        {
+                            <ul class="dropdown menu" data-dropdown-menu>
+                                <li>
+                                    <a href="#">Admin</a>
+                                    <ul class="menu">
+                                        <li>@Html.ActionLink("User List", "List", "Users")</li>
+                                        <li>@Html.ActionLink("Book List", "Index", "Books")</li>
+                                        <li>@Html.ActionLink("Recommendation List", "List", "Recommendations")</li>
+                                        @*<li>@Html.ActionLink("Statistics List", "List", "Statistics")</li>*@
+                                        <li>@Html.ActionLink("Picture List", "Index", "Pictures")</li>
+                                        <li>@Html.ActionLink("Wishlist Alert", "WishlistAlert", "Books")</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                        else if (Session["Role"].ToString() == "User")
+                        {
+                            <ul class="dropdown menu" data-dropdown-menu>
+                                <li>
+                                    <a href="#">Hello, @Session["FullName"].ToString()</a>
+                                    <ul class="menu">
+                                        <li>@Html.ActionLink("Profile", "Details", "Users", new { id = @Session["id"].ToString() }, null)</li>
+                                        <li>@Html.ActionLink("Wishlist", "Wishlist", "Books", new { id = @Session["id"].ToString() }, null)</li>
+                                        <li>@Html.ActionLink("Delete My Account", "Delete", "Users", new { id = @Session["id"].ToString() }, null)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <br />
+    <!-- End Top Bar -->
+    <script>
+        $(document).foundation();
+    </script>
+    @RenderBody()
+    <br />
+    <footer>
+        <div class="top-bar" id="example-menu" style="height:130px;padding:25px">
+            <div class="top-bar-left" style="padding:0px 0px 0px 80px">
+                <ul class="menu" >
+                    <li class="menu-text">Books Online</li>
+                </ul>
+                <p style="padding:.7rem 1rem">The best place to buy and rent books online.</p>
+            </div>
+            <div class="top-bar-right" style="padding:0px 80px 0px 0px">
+                <ul class="menu">
+                    <li>@Html.ActionLink("Home", "Home", "Books")</li>
+                    <li>@Html.ActionLink("Books", "Index", "Books")</li>
+                    <li>@Html.ActionLink("Recommendations", "Recommendations", "Books")</li>
+                </ul>
+                <ul class="menu">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </footer><br /> 
+    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+</body>
+</html>

@@ -1,0 +1,130 @@
+﻿@model IEnumerable<BooksOnline.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+<body>
+    @*<div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+            <ul class="orbit-container">
+                <li class="orbit-slide is-active">
+                    <img src="~/images/blbanner1.jpg">
+                </li>
+            </ul>
+        </div><br /><br />*@
+    <div class="row column">
+        <div class="container">
+            <div class="form-header" style=" margin: 30px auto 30px auto">
+                <h2>Book List</h2>
+            </div>
+            <table class="table" style="width:100%">
+                <div class="row">
+                    @using (Html.BeginForm("Index", "Books", FormMethod.Get))
+                    {
+                        <div class="small-5 columns">
+                            @Html.TextBox("search")
+                        </div>
+                        <div class="small-3 columns">
+                            <select name="filter" id="filter">
+                                <option value="title">Title</option>
+                                <option value="subject">Subject</option>
+                                <option value="author">Author</option>
+                                <option value="price">Price</option>
+                                <option value="availability">Availability</option>
+                            </select>
+                        </div>
+                        <div class="small-3 columns">
+                            <input type="submit" value="Search" class="btnSubmit" />
+                            @{
+                                if (Session["Role"] != null)
+                                {
+                                    if (Session["Role"].ToString() == "Admin")
+                                    {
+                                        <button class="btnSubmit">@Html.ActionLink("Create New", "Create")</button>
+                                    }
+                                }
+                            }
+
+                        </div>
+                    }
+                </div>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Subject)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Author)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Availability)
+                        </th>
+                        @{
+                            if (Session["Role"] != null)
+                            {
+                                <th>
+                                    Action
+                                </th>
+
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Subject)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Availability)
+                            </td>
+                            @{
+                                if (Session["Role"] != null)
+                                {
+                                    if (Session["Role"].ToString() == "User")
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Add To Wishlist", "AddToWishlist", new { bookID = item.ID }) |
+                                            @Html.ActionLink("Reserve", "Details", "booksOwn", new { id = item.ID }, null) |
+                                            @Html.ActionLink("Buy", "Details", "booksOwn", new { id = item.ID }, null)
+                                        </td>
+
+                                    }
+                                    else if (Session["Role"].ToString() == "Admin")
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                                            @Html.ActionLink("Picture", "Create", "Pictures", new { id = item.ID }, null) 
+                                        </td>
+
+                                    }
+                                }
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

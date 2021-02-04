@@ -1,0 +1,64 @@
+﻿@model BooksOnline.Models.Picture
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+<body>
+    <div class="row column">
+        <div class="container" style="border:solid 1px rgba(0,0,0,.125); margin-top:20px">
+            <div class="form-header" style="margin-top:0px">
+                <h2>Book Details</h2>
+            </div>
+            <div class="row" style="padding:20px">
+                <div class="column medium-4">
+                    <div class="column">
+                        @{ 
+                            string path = @Model.path;
+                            string newpath = path.TrimStart('~');
+                        }
+                         
+                        <img src="@newpath" style="float:right" alt="@Model.title">
+                    </div>
+                </div>
+                <div class="column medium-7" style="float:left">
+                    <table class="table" style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.title)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(model => model.title)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayNameFor(model => model.page)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(model => model.page)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayNameFor(model => model.path)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(model => model.path)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><br />
+        </div><br />
+              <p>
+                  @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+                  @Html.ActionLink("Back to Picture List", "Index") |
+                  @Html.ActionLink("Go to Book List", "Index", "Books")
+              </p>
+    </div>
+</body>
+

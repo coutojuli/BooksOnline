@@ -1,0 +1,153 @@
+﻿@using BooksOnline.Helpers;
+@model IEnumerable<BooksOnline.Models.Book>
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+@{
+    BooksOnline.Helpers.Recommendations r = new BooksOnline.Helpers.Recommendations();
+}
+
+<body>
+    <div class="row column">
+        <img src="~/images/banner3.jpg" style="width:100%">
+    </div><br />
+    
+    <div class="row column text-center">
+        <h2>Books Reservations</h2>
+    </div><br />
+
+    <div class="row small-up-2 large-up-4">
+        @{
+            foreach (var item in Model)
+            {
+                foreach (var num in ViewBag.RandomReserve)
+                {
+                    if (num == item.ID)
+                    {
+                        foreach (var value in ViewBag.Pictures)
+                        {
+                            if (item.ID == value.BookID)
+                            {
+                                <div class="column">
+                                    @{
+                                        string path = value.path;
+                                        string newpath = path.TrimStart('~');
+                                    }
+                                    <a href="~/Books/Index?search=@item.Title&filter=title"><img src="@newpath" style="float:right; margin-bottom:20px;width:100%" alt="@value.title"></a>
+                                    <h5 style="text-align:center;font-size:18px">@item.Title</h5><br />
+                                    <button class="btnExtended">@Html.ActionLink("Reserve", "Details", "booksOwn", new { id = item.ID }, null)</button>
+                                </div>
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+    </div><br />
+    <div class="row column text-center">
+        <h2>Shop Books</h2>
+    </div><br />
+    <div class="row small-up-2 medium-up-3 large-up-6">
+        @{
+            foreach (var item in Model)
+            {
+                foreach (var num in ViewBag.RandomBuy)
+                {
+                    if (num == item.ID)
+                    {
+                        foreach (var value in ViewBag.Pictures)
+                        {
+                            if (item.ID == value.BookID)
+                            {
+                                <div class="column">
+                                    @{
+                                        string path = value.path;
+                                        string newpath = path.TrimStart('~');
+                                    }
+                                    <a href="~/Books/Index?search=@item.Title&filter=title"><img src="@newpath" style="float:right; margin-bottom:20px;width:196px;height:259px" alt="@value.title"></a>
+                                        <p style="text-align:center;font-size:15px">@item.Title</p>
+                                        <p style="text-align:center;font-size:14px">Price: $ @item.Price</p>
+                                        <button class="btnExtended">@Html.ActionLink("Buy", "Details", "booksOwn", new { id = item.ID }, null)</button>
+
+</div>
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+    </div>
+
+    <div class="row column" style="margin: 50px auto 50px auto">
+        <a href="~/Recommendations/Index"><img src="~/images/footer-banner.jpg" style="width:100%"></a>
+    </div>
+
+    <div class="row small-up-2 large-up-5">
+
+        @foreach (var item in ViewBag.Recommendations)
+        {
+            string now = DateTime.Now.ToString("dd/MM/yyyy");
+            var splitnow = now.Split('-');
+            string monthnow = splitnow[1];
+            string yearnow = splitnow[2];
+            string monthprint = r.GetMonth(monthnow);
+            string date = item.date;
+            var split = date.Split('-');
+            string month = split[1];
+            string year = split[2];
+
+
+            if (year.Equals(yearnow) && month.Equals(monthnow))
+            {
+
+                foreach (var value in ViewBag.Pictures)
+                {
+                    if (item.BookID == value.BookID)
+                    {
+        <div class="column">
+            @{
+                string path = value.path;
+                string newpath = path.TrimStart('~');
+            }
+            @*Recommendation list Category different of Book Subjects for the purpose of demonstration
+        as database size is too small.*@
+            @*<h5 style="text-align:center;font-size:18px">@item.Book.Subject</h5><br />*@
+            @if (!(item.Category.Equals("Store Choice")))
+            {
+                <h5 style="text-align:center;font-weight:bold;">Best of the @item.Category</h5><br />
+            }
+            else
+            {
+                <h5 style="text-align:center;font-weight:bold;">@item.Category</h5><br />
+            }
+            <img src="@newpath" style="float:right; margin-bottom:20px;width:200px;height:200px; border-radius: 50%; margin:20px 20px 30px 20px" alt="@value.title">
+
+            <h5 style="text-align:center;font-size:18px">@item.Book.Title</h5><br />
+
+            <button class="btnExtended" style="color:black">@Html.ActionLink("Check Details", "Index", "Books", new { search = @item.Book.Title, filter = "title" }, null)</button>
+            
+        </div>
+
+                    }
+
+                }
+
+            }
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+
+

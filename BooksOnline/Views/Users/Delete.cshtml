@@ -1,0 +1,125 @@
+﻿@model BooksOnline.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <div class="row column">
+            <div class="container">
+                <div class="form-header">
+                    <h2>Are you sure you want to delete <b>@Model.FirstName @Model.LastName</b> account? </h2>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+
+                <table class="table" style="width:100%;">
+                    <tbody>
+                        @{
+                            if (Session["Role"] != null)
+                            {
+                                if (Session["Role"].ToString() == "Admin")
+                                {
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @Html.DisplayNameFor(model => model.id)
+                                        </td>
+                                        <td style="text-align:left">
+                                            @Html.DisplayFor(model => model.id)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @Html.DisplayNameFor(model => model.Role)
+                                        </td>
+                                        <td style="text-align:left">
+                                            @Html.DisplayFor(model => model.Role)
+                                        </td>
+                                    </tr>
+                                }
+                                else if (Session["Role"].ToString() == "User")
+                                {
+                                    @Html.HiddenFor(model => model.id)
+                                    @Html.HiddenFor(model => model.Role)
+                                }
+                            }
+                        }
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.Email)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.FirstName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.LastName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.DOB)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.DOB)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.Phone)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(model => model.Address)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row form-actions no-color" style="margin: 20px auto">
+                    <input type="submit" value="Delete" class="btnSubmit" />
+                </div>
+                <div>
+                    @Html.ActionLink("Edit User", "Edit", "Users", new { id = Model.id }, null) |
+                    @Html.ActionLink("User Details", "Details", "Users", new { id = Session["id"].ToString() }, null) |
+                    @Html.ActionLink("Go to Wishlist", "Wishlist", "Books", new { id = Session["id"].ToString() }, null) |
+
+                    @if (Session["Role"].ToString() == "Admin")
+                    {
+                        @Html.ActionLink("Go to Users List", "List", "Users")
+                    }
+
+                </div>
+            </div>
+        </div>
+    </body>
+}
+
+
+
+
+
+

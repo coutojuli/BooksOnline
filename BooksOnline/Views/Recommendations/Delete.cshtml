@@ -1,0 +1,52 @@
+﻿@model BooksOnline.Models.Recommendation
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row column">
+        <div class="container">
+            <div class="form-header">
+                <h2>Are you sure you want to delete the recommendation for <b>@Html.DisplayFor(model => model.Book.Title)</b>? </h2>
+            </div>
+            <table class="table" style="width:100%;">
+                <tbody>
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.DisplayNameFor(model => model.Book.Title)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.Book.Title)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.DisplayNameFor(model => model.Category)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.Category)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.DisplayNameFor(model => model.date)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.date)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btnSubmit" /> 
+            </div>
+            <div>
+                @Html.ActionLink("Back to Recommendation List", "List")
+            </div>
+        </div>
+    </div>
+}

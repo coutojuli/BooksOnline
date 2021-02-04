@@ -1,0 +1,52 @@
+﻿@model BooksOnline.Models.Wishlist
+
+
+@{
+    ViewBag.Title = "AddToWishlist";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <body>
+        <div class="row column">
+            <div class="container">
+                <div class="form-header">
+                    @foreach (var item in ViewBag.Data)
+                    {
+                        <h2>Are you sure you want to add <b>@item.Title</b> to your wishlist? </h2>
+                    }
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.UserID)
+                <table class="table" style="width:100%;">
+                    <tbody>
+                        <tr>
+                            <td style="text-align:center">
+                                Would you like to be notified once this book is available in stock?
+                            </td>
+                            <td style="text-align:left">
+                                @Html.RadioButtonFor(model => model.Notification, "Yes") Yes <br />
+                                @Html.RadioButtonFor(model => model.Notification, "No") No
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row form-actions no-color" style="margin: 20px auto">
+                    <input type="submit" value="Add" class="btnSubmit" />
+                </div>
+                <div>
+                    @Html.ActionLink("Back to Book List", "Index", "Books") |
+                    @Html.ActionLink("Go to Wishlist", "Wishlist", "Books")
+                </div>
+            </div>
+        </div>
+    </body>
+}
+
+
+
+

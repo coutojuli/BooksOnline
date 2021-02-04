@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BooksOnline.Models.StatisticsModel>
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link rel="stylesheet" href="~/CSS/Statistics.css">
+</head>
+<body>
+    <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+        <ul class="orbit-container">
+            <li class="orbit-slide is-active">
+                <img src="~/images/stabanner1.jpg">
+            </li>
+        </ul>
+    </div><br />
+    <div class="row column text-center">
+        <h2>Books Online: Statistics 2020</h2><br />
+        <h5> The following statistics are made considering the inflow of users, the amount of books sold , 
+        the amount of books reservations, how often customers review books, how often customers rate books, 
+        and how often users wishlist a book. Three timeframes are consired: daily, monthly and yearly.
+        Statistics are important because it enables Books Online to know how the company can do better to achieve
+        better customer satisfaction. Don't forget to review, rate, and wishlist the book you desire.</h5>
+    </div><br />
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="row column">
+                <dl>
+                    <dt>
+                        Books Online Statistics : Day
+                    </dt>
+                    <br />
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayUsers)"><span class="text">Users: @Html.DisplayFor(modelItem => item.dayUsersAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayBuy)"><span class="text">Solds: @Html.DisplayFor(modelItem => item.dayBuyAmount)</span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayRent)"><span class="text">Rents: @Html.DisplayFor(modelItem => item.dayRentAmount)</span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayReviews)"><span class="text">Reviews: @Html.DisplayFor(modelItem => item.dayReviewsAmount)</span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayRatings)"><span class="text">Ratings: @Html.DisplayFor(modelItem => item.dayRatingsAmount)</span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.dayWishlist)"><span class="text">Wishlisted: @Html.DisplayFor(modelItem => item.dayWishlistAmount)</span></dd>
+                </dl>
+            </div>
+            <hr />
+            <div class="row column">
+                <dl>
+                    <dt>
+                        Books Online Statistics : Month
+                    </dt>
+                    <br />
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthUsers) "><span class="text">Users: @Html.DisplayFor(modelItem => item.monthUsersAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthBuy)"><span class="text">Solds: @Html.DisplayFor(modelItem => item.monthBuyAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthRent)"><span class="text">Rents: @Html.DisplayFor(modelItem => item.monthRentAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthReviews)"><span class="text">Reviews: @Html.DisplayFor(modelItem => item.monthReviewsAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthRatings)"><span class="text">Ratings: @Html.DisplayFor(modelItem => item.monthRatingsAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.monthWishlist)"><span class="text">Wishlisted: @Html.DisplayFor(modelItem => item.monthWishlistAmount) </span></dd>
+                </dl>
+                <hr />
+            </div>
+            <div class="row column">
+                <dl>
+                    <dt>
+                        Books Online Statistics : Year
+                    </dt>
+                    <br />
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearUsers)"><span class="text">Users: @Html.DisplayFor(modelItem => item.yearUsersAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearBuy)"><span class="text">Sold: @Html.DisplayFor(modelItem => item.yearBuyAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearRent)"><span class="text">Rents: @Html.DisplayFor(modelItem => item.yearRentAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearReviews)"><span class="text"> Reviews: @Html.DisplayFor(modelItem => item.yearReviewsAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearRatings)"><span class="text"> Ratings: @Html.DisplayFor(modelItem => item.yearRatingsAmount) </span></dd>
+                    <dd class="percentage percentage-@Html.DisplayFor(modelItem => item.yearWishlist)"><span class="text">Wishlisted: @Html.DisplayFor(modelItem => item.yearWishlistAmount) </span></dd>
+                </dl>
+            </div>
+                }
+                }
+        </body>
+</html>
+

@@ -1,0 +1,77 @@
+﻿@model BooksOnline.Models.Picture
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Pictures", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="row column container" style="padding-top:30px">
+            <div class="medium-11 medium-centered columns" style="padding:0px 30px 30px 30px; border:solid 1px rgba(0,0,0,.125);">
+                <div class="form-header">
+                    <h2>Add Pictures</h2>
+                </div><br />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @{
+                    if (ViewBag.Book != null)
+                    {
+                        foreach (var item in ViewBag.Book)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @Value = @item.Title, @readonly = "readonly" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BookID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.BookID, new { htmlAttributes = new { @Value = @item.ID, @readonly = "readonly" } })
+                                </div>
+                            </div>
+                        }
+
+                    }
+                    else
+                    {
+                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                        <label>@ViewBag.BookName</label>
+                    }
+                }
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.page, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.page, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.page, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.path, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="ImageFile" required />
+                    </div>
+                </div><br />
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btnSubmit"> Create</button>
+                        <button type="reset" class="btnSubmit">Clear</button>
+                    </div>
+                </div>
+            </div><br />
+            <div>
+                @Html.ActionLink("Back to Picture List", "Index")
+            </div>          
+        </div>
+    </body>
+}

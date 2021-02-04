@@ -1,0 +1,89 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+body {
+    margin: 0;
+    text-align: left;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.row{
+        max-width: 85rem;
+}
+.cardHeader {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #F2EEEE;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    text-align: center;
+    font-size: 20px;
+}
+.card-body {
+    margin: 10px;
+    font-size: 15px;
+}
+#forgot{
+    font-size:15px;
+    text-align:left;
+    padding-left:0px;
+}
+.btnSubmit {
+    color: black;
+    background-color: #F2EEEE;
+    border-color: rgba(0, 128, 0, 0.05);
+    text-align: center;
+    font-size: 18px;
+    height: 35px;
+    width: 100px;
+    /*margin:8px auto;*/
+}
+.btnExtended {
+    color: black;
+    width: 100%;
+    display: block;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .25s ease-out;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: .85em 1em;
+    margin: 0 1rem 1rem 0;
+    font-size: .9rem;
+    background-color: #F2EEEE;
+}
+.btnExtended  a{
+    color: black;
+    border-color: rgba(0, 128, 0, 0.05);
+    font-size: 18px;
+}
+.btnSubmit a{
+color: black;
+background-color: #F2EEEE;
+border-color: rgba(0, 128, 0, 0.05);
+text-align: center;
+font-size: 18px;
+height: 35px;
+width: 100px;
+/*margin:8px auto;*/
+}
+/*Register page: Admin - List, Edit, Update, Delete*/
+.table {
+    font-size: 16px;
+}
+.table tbody tr:nth-child(even) {
+    background-color: #F2EEEE;
+}
+/*form container : Edit page - Register Admin*/
+.form-header {
+    padding: 0.75rem 1.25rem;
+    background-color: #F2EEEE;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    width: 100%;
+    margin: 30px auto 0px auto;
+}
+.form-header h2 {
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+}

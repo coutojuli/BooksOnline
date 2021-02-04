@@ -1,0 +1,120 @@
+﻿@model BooksOnline.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+
+<body>
+    <div class="row column">
+        <div class="container">
+            <div class="form-header">
+                <h2>User Details</h2>
+            </div>
+            <table class="table" style="width:100%;">
+                @{
+                    if (Session["Role"] != null)
+                    {
+                        if (Session["Role"].ToString() == "Admin")
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayNameFor(model => model.id)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(model => model.id)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayNameFor(model => model.Role)
+                                </td>
+                                <td style="text-align:left">
+                                    @Html.DisplayFor(model => model.Role)
+                                </td>
+                            </tr>
+                        }
+                        else if (Session["Role"].ToString() == "User")
+                        {
+                            @Html.HiddenFor(model => model.id)
+                            @Html.HiddenFor(model => model.Role)
+                        }
+                    }
+                }
+
+                <tbody>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.FirstName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </td>
+                        <td style="text-align:left">
+                            @Html.DisplayFor(model => model.LastName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.DOB)
+                        </td>
+                        <td style="text-align:left">
+                            @if (Model.DOB != null)
+                            {
+                                @Html.DisplayFor(model => model.DOB)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </td>
+                        <td style="text-align:left">
+                            @if (Model.Phone != null)
+                            {
+                                @Html.DisplayFor(model => model.Phone)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center">
+                            @Html.DisplayNameFor(model => model.Address)
+                        </td>
+                        <td style="text-align:left">
+                            @if (Model.Address != null)
+                            {
+                                @Html.DisplayFor(model => model.Address)
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                @Html.ActionLink("Edit User", "Edit", "Users", new { id = Model.id }, null) |     
+                @Html.ActionLink("Delete Account", "Delete", "Users", new { id = Session["id"].ToString() }, null) |
+                @Html.ActionLink("Go to Wishlist", "Wishlist", "Books", new { id = Session["id"].ToString() }, null) |
+
+                @if (Session["Role"].ToString() == "Admin")
+                {
+                    @Html.ActionLink("Go to Users List", "List", "Users")
+                }
+
+            </p>
+        </div>
+    </div>
+</body>

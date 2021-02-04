@@ -1,0 +1,79 @@
+﻿@model BooksOnline.Models.User
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-5">
+            @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+            {
+                //@Html.ValidationSummary()
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="medium-11 medium-centered columns" style="padding:0px 15px 9px 15px;margin:auto; border:solid 1px rgba(0,0,0,.125);">
+                        <div class="row align-center">
+                            <div class="cardHeader" style="margin-bottom:15px">Register</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="medium-2 columns">
+                                    <label for="password">First Name</label>
+                                </div>
+                                <div class="medium-10 columns">
+                                    @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control", @placeholder = "First Name" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { style = "color: red", @placeholder = "First Name" })
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="medium-2 columns">
+                                    <label for="password">Last Name</label>
+                                </div>
+                                <div class="medium-10 columns">
+                                    @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control", @placeholder = "Last Name" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { style = "color: red", @placeholder = "Last Name" })
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="medium-2 columns">
+                                    <label for="password">Email</label>
+                                </div>
+                                <div class="medium-10 columns">
+                                    @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { style = "color: red", @placeholder = "Email" })
+                                    @if (ViewBag.error != null)
+                                    {
+                                        <span style="color:red">Error: @ViewBag.error</span>
+                                    }
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="medium-2 columns">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="medium-10 columns">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { style = "color: red", @placeholder = "Password" })
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="medium-2 columns">
+                                    <label for="password">Confirm Password</label>
+                                </div>
+                                <div class="medium-10 columns">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { style = "color: red", @placeholder = "Confirm Password" })
+                                </div>
+                            </div><br />
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btnSubmit" value="Register" />
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+            }
+            </div>
+            </div>
+

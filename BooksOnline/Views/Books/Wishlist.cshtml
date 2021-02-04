@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BooksOnline.Models.Wishlist>
+
+@{
+    ViewBag.Title = "Wishlist";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+<body>
+    <div class="row column">
+        <div class="container">
+            <div class="form-header" style=" margin: 30px auto 0px auto">
+                <h2>Wishlist</h2>
+            </div>
+            <table class="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Availability
+                        </th>
+                        <th>
+                            Notification
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in ViewBag.Data)
+                    {
+                        <tr>
+                            <td>
+                                @item.Title
+                            </td>
+                            <td>
+                                @item.Availability
+                            </td>
+                            @foreach (var m in Model)
+                            {
+                                if (m.BookID == item.ID)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => m.Notification)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Remove from Wishlist", "DeleteFromWishlist", new { id = m.ID })
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.ActionLink("Back to Book List", "Index", "Books") 
+        </div>
+    </div>
+</body>
+

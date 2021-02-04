@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BooksOnline.Models.Picture>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout_Foundation.cshtml";
+}
+
+    <body>
+        <div class="row column">
+            <div class="container">
+                <div class="form-header" style=" margin: 30px auto 0px auto">
+                    <h2>Picture List</h2>
+                </div>
+                <table class="table" style="width:100%">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.page)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.path)
+                        </th>
+                        <th>
+                            @Html.ActionLink("Add new picture", "Create")
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.page)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.path)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            @Html.ActionLink("Go to Book List","Index", "Books")
+        </div>
+</body>
