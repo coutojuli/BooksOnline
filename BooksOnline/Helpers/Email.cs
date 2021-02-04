@@ -18,9 +18,9 @@ namespace BooksOnline.Common
         {
             var apiKey = ConfigurationManager.AppSettings["emailAPI"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("mohitsharma3119@gmail.com", "Example User");
+            var from = new EmailAddress("email", "Example User");
             var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress("juliana.assignment8@gmail.com", "Example User");
+            var to = new EmailAddress("email", "Example User");
             var plainTextContent = "and easy to do anywhere, even with C#";
             var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
@@ -29,7 +29,7 @@ namespace BooksOnline.Common
         
         public static async Task<Response> WishlistAlert(List<Book> booklist, User user)
         {
-            String userEmail = "juliana.assignment8@gmail.com";
+            String userEmail = "email";
             //string userEmail = user.Email;
             String userName = user.FirstName + " " + user.LastName;
             String context = "Dear user " + userName + ".\n The following books are now available on Books Online:";
@@ -48,7 +48,7 @@ namespace BooksOnline.Common
             
             var apiKey = ConfigurationManager.AppSettings["emailAPI"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("mohitsharma3119@gmail.com", "Admin");
+            var from = new EmailAddress("email", "Admin");
             var subject = "Wishlist Alert";
             var to = new EmailAddress(userEmail, "User");
             var plainTextContent = context;
